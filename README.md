@@ -89,7 +89,10 @@ CREATE TABLE jogos (
 
 ### Passos para Execução
 
-1. **Clone ou baixe o projeto**
+1. **Clone o projeto do GitHub e acesse o diretório clonado**
+```bash
+git clone https://github.com/MarcosGardinali/my-games.git
+```
 ```bash
 cd my-games
 ```
@@ -98,6 +101,31 @@ cd my-games
 ```bash
 docker compose up --build
 ```
+
+### ⚠️ **IMPORTANTE - Primeiro Build**
+
+**O primeiro build pode levar de 3 a 8 minutos** para ser concluído, dependendo da sua conexão de internet e hardware. Isso é normal e acontece porque:
+
+- **Download das imagens Docker**: Node.js 20, Node.js 18 e MySQL 8.0 (~200-400MB total)
+- **Instalação de dependências**: npm install do Angular/Ionic e Express
+- **Compilação do projeto**: Build do TypeScript e bundling do Angular
+
+**🔍 Como saber quando está pronto:**
+
+Aguarde até ver **todas** estas mensagens no terminal:
+
+```bash
+app-1  | ✔ Browser application bundle generation complete.
+app-1  | Local:   http://localhost:4200/
+api-1  | Servidor rodando na porta 3002
+db-1   | ready for connections
+```
+
+**✅ Quando aparecerem, acesse:** http://localhost:4200
+
+**💡 Dica:** Builds subsequentes são muito mais rápidos (1-2 minutos) devido ao cache do Docker.
+
+**🚨 Se demorar mais de 10 minutos:** Verifique sua conexão de internet ou tente `docker compose down` e execute novamente.
 
 3. **Aguarde a inicialização** (pode levar alguns minutos na primeira vez)
 

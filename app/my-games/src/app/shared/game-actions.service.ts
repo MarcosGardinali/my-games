@@ -117,7 +117,7 @@ export class GameActionsService {
         },
         {
           text: 'Excluir',
-          cssClass: 'alert-button-confirm',
+          cssClass: 'alert-button-danger',
           handler: () => {
             this.jogosService.deleteJogo(jogo.id!).subscribe({
               next: () => {

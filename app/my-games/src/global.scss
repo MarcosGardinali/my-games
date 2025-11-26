@@ -138,6 +138,14 @@
   border: none !important;
 }
 
+.game-form-alert .alert-button.alert-button-danger,
+.delete-alert .alert-button.alert-button-danger {
+  background: linear-gradient(45deg, #dc2626, #b91c1c) !important;
+  color: white !important;
+  box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4) !important;
+  border: none !important;
+}
+
 /* Hover effects */
 .game-form-alert .alert-button:hover,
 .delete-alert .alert-button:hover {

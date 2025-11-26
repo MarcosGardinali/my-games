@@ -1,0 +1,273 @@
+/* Background animado */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(34, 197, 94, 0.6), 0 0 60px rgba(16, 185, 129, 0.4); }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+ion-content {
+  --background: radial-gradient(ellipse at top, #0f1419 0%, #1a2e1a 50%, #0a0f0a 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+ion-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(34, 197, 94, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+  animation: float 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  justify-items: center;
+}
+
+@media (max-width: 768px) {
+  .games-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 16px;
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .games-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    max-width: 900px;
+  }
+}
+
+.game-card {
+  margin: 0;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden;
+  animation: slideInUp 0.6s ease-out;
+  position: relative;
+  width: 100%;
+  max-width: 350px;
+}
+
+.game-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(34, 197, 94, 0.1) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.game-card:hover {
+  transform: translateY(-15px) scale(1.03);
+  box-shadow: 0 25px 60px rgba(16, 185, 129, 0.4);
+  animation: glow 2s ease-in-out infinite;
+}
+
+.game-card:hover::before {
+  opacity: 1;
+}
+
+.game-image {
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(45deg, #10b981 0%, #22c55e 100%);
+}
+
+.game-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  filter: brightness(0.9);
+}
+
+.game-card:hover .game-image img {
+  transform: scale(1.15) rotate(2deg);
+  filter: brightness(1.1) saturate(1.2);
+}
+
+.game-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(45deg, #10b981 0%, #22c55e 100%);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.game-image-placeholder ion-icon {
+  font-size: 72px;
+  filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.4));
+  animation: float 3s ease-in-out infinite;
+}
+
+ion-card-header {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+ion-card-title {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.4em;
+  font-family: 'Orbitron', monospace;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  margin-bottom: 8px;
+}
+
+ion-card-subtitle {
+  color: #34d399;
+  font-weight: 500;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.1em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+ion-card-content {
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 0.95);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.1em;
+  line-height: 1.6;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.card-actions ion-button {
+  --border-radius: 15px;
+  --box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+  --padding-start: 16px;
+  --padding-end: 16px;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.card-actions ion-button:hover {
+  transform: translateY(-3px);
+  --box-shadow: 0 12px 35px rgba(16, 185, 129, 0.5);
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  position: relative;
+  z-index: 1;
+}
+
+.empty-state ion-icon {
+  font-size: 100px;
+  margin-bottom: 30px;
+  background: linear-gradient(45deg, #10b981, #22c55e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 4px 20px rgba(16, 185, 129, 0.4));
+  animation: float 4s ease-in-out infinite;
+}
+
+.empty-state h2 {
+  margin: 20px 0 12px 0;
+  font-weight: 700;
+  color: white;
+  font-family: 'Orbitron', monospace;
+  font-size: 2em;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.8);
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 1.2em;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: 'Rajdhani', sans-serif;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+ion-toolbar {
+  --background: rgba(0, 0, 0, 0.8);
+  --color: white;
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+ion-title {
+  font-weight: 800;
+  font-family: 'Orbitron', monospace;
+  font-size: 1.2em;
+  color: white !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  text-align: left !important;
+  padding-left: 8px;
+}
+
+ion-button[color="light"] {
+  --background: linear-gradient(45deg, #10b981, #22c55e);
+  --color: white;
+  --border-radius: 15px;
+  font-weight: 700;
+  font-family: 'Rajdhani', sans-serif;
+  --box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+  transition: all 0.3s ease;
+}
+
+ion-button[color="light"]:hover {
+  transform: translateY(-2px);
+  --box-shadow: 0 12px 35px rgba(16, 185, 129, 0.6);
+}

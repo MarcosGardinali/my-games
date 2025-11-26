@@ -1,0 +1,6 @@
+my-games/node_modules
+my-games/www
+my-games/.angular
+my-games/dist
+.git
+.DS_Store

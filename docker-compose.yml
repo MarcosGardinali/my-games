@@ -1,0 +1,50 @@
+services:
+
+  db:
+    image: mysql:8.0
+    container_name: mysql-mygames
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mygamesdb
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - mysql_data:/var/lib/mysql
+
+  api:
+    build: 
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: api-mygames
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: mygamesdb
+    depends_on:
+      - db
+    volumes:
+      - ./api/src:/app/src
+
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: app-mygames
+    restart: unless-stopped
+    ports:
+      - "8100:8100"
+    depends_on:
+      - api
+    volumes:
+      - ./app/my-games/src:/app/src
+      - app_node_modules:/app/node_modules
+
+volumes:
+  mysql_data:
+  app_node_modules:

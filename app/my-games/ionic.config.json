@@ -1,0 +1,7 @@
+{
+  "name": "my-games",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

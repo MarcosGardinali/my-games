@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Novo Jogo</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Fechar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-input [(ngModel)]="jogo.nome" label="Nome do jogo" placeholder="Digite o nome"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-textarea [(ngModel)]="jogo.descricao" label="Descrição" placeholder="Digite a descrição"></ion-textarea>
+  </ion-item>
+
+  <ion-item>
+    <ion-input [(ngModel)]="jogo.ano" type="number" label="Ano" placeholder="2024"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-input [(ngModel)]="jogo.plataforma" label="Plataforma" placeholder="PC, PS5, Xbox"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-input [(ngModel)]="jogo.foto_url" label="URL da Foto" placeholder="https://..."></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Status</ion-label>
+    <ion-select [(ngModel)]="jogo.status">
+      <ion-select-option value="possuo">Possuo o jogo</ion-select-option>
+      <ion-select-option value="desejo">Lista de desejos</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-button expand="full" (click)="confirm()">Salvar</ion-button>
+</ion-content>

@@ -7,8 +7,10 @@ CREATE TABLE IF NOT EXISTS jogos (
   descricao TEXT,
   ano INT,
   plataforma VARCHAR(50),
-  foto_url VARCHAR(500)
+  foto_url VARCHAR(500),
+  status ENUM('possuo', 'desejo') DEFAULT 'possuo'
 );
 
--- Adicionar coluna foto_url se não existir
+-- Adicionar colunas se não existirem
 ALTER TABLE jogos ADD COLUMN IF NOT EXISTS foto_url VARCHAR(500);
+ALTER TABLE jogos ADD COLUMN IF NOT EXISTS status ENUM('possuo', 'desejo') DEFAULT 'possuo';

@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ isEdit ? 'Editar Jogo' : 'Novo Jogo' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div style="padding: 20px;">
+    <div style="margin-bottom: 15px;">
+      <label style="color: white; display: block; margin-bottom: 5px;">Nome do jogo:</label>
+      <input [(ngModel)]="jogo.nome" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #10b981; background: rgba(255,255,255,0.1); color: white;" placeholder="Digite o nome">
+    </div>
+    
+    <div style="margin-bottom: 15px;">
+      <label style="color: white; display: block; margin-bottom: 5px;">Descrição:</label>
+      <textarea [(ngModel)]="jogo.descricao" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #10b981; background: rgba(255,255,255,0.1); color: white; min-height: 80px;" placeholder="Digite a descrição"></textarea>
+    </div>
+    
+    <div style="margin-bottom: 15px;">
+      <label style="color: white; display: block; margin-bottom: 5px;">Ano:</label>
+      <input [(ngModel)]="jogo.ano" type="number" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #10b981; background: rgba(255,255,255,0.1); color: white;" placeholder="2024">
+    </div>
+    
+    <div style="margin-bottom: 15px;">
+      <label style="color: white; display: block; margin-bottom: 5px;">Plataforma:</label>
+      <input [(ngModel)]="jogo.plataforma" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #10b981; background: rgba(255,255,255,0.1); color: white;" placeholder="PC, PS5, Xbox, etc.">
+    </div>
+    
+    <div style="margin-bottom: 15px;">
+      <label style="color: white; display: block; margin-bottom: 5px;">URL da Foto:</label>
+      <input [(ngModel)]="jogo.foto_url" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #10b981; background: rgba(255,255,255,0.1); color: white;" placeholder="https://...">
+    </div>
+    
+    <div style="margin-bottom: 20px;" *ngIf="!isEdit">
+      <label style="color: white; display: block; margin-bottom: 5px;">Status:</label>
+      <select [(ngModel)]="jogo.status" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #10b981; background: rgba(255,255,255,0.1); color: white;">
+        <option value="possuo">Possuo o jogo</option>
+        <option value="desejo">Lista de desejos</option>
+      </select>
+    </div>
+    
+    <button (click)="save()" [disabled]="!isValid()" style="width: 100%; padding: 15px; background: linear-gradient(45deg, #10b981, #22c55e); color: white; border: none; border-radius: 15px; font-weight: bold; cursor: pointer;">
+      {{ isEdit ? 'Atualizar' : 'Salvar' }}
+    </button>
+  </div>
+</ion-content>

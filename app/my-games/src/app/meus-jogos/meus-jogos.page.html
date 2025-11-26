@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title slot="start">🎮 Meus Jogos</ion-title>
+    <ion-title>🎮 Meus Jogos</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="addJogo()" fill="solid" color="light">
         <ion-icon name="add-circle" slot="start"></ion-icon>
@@ -23,9 +23,9 @@
       <ion-card-header>
         <ion-card-title>{{ jogo.nome }}</ion-card-title>
         <ion-card-subtitle>{{ jogo.ano }} - {{ jogo.plataforma }}</ion-card-subtitle>
-        <div class="status-badge" [class.possuo]="jogo.status === 'possuo'" [class.desejo]="jogo.status === 'desejo'" *ngIf="jogo.status">
-          <ion-icon [name]="jogo.status === 'possuo' ? 'checkmark-circle' : 'heart'"></ion-icon>
-          {{ jogo.status === 'possuo' ? 'POSSUO' : 'DESEJO' }}
+        <div class="status-badge possuo">
+          <ion-icon name="checkmark-circle"></ion-icon>
+          POSSUO
         </div>
       </ion-card-header>
       
@@ -33,9 +33,6 @@
         <p>{{ jogo.descricao }}</p>
         
         <div class="card-actions">
-          <ion-button *ngIf="jogo.status === 'desejo'" fill="clear" (click)="marcarComoComprado(jogo)" color="success">
-            <ion-icon name="bag-check" slot="icon-only"></ion-icon>
-          </ion-button>
           <ion-button fill="clear" (click)="editJogo(jogo)" color="primary">
             <ion-icon name="pencil" slot="icon-only"></ion-icon>
           </ion-button>
@@ -50,6 +47,6 @@
   <div *ngIf="jogos.length === 0" class="empty-state">
     <ion-icon name="game-controller-outline"></ion-icon>
     <h2>NENHUM JOGO</h2>
-    <p>Comece sua coleção adicionando seu primeiro jogo</p>
+    <p>Você ainda não possui nenhum jogo em sua coleção</p>
   </div>
 </ion-content>

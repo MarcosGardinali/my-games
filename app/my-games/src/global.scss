@@ -92,38 +92,71 @@
 
 .game-form-alert .alert-button-group {
   padding: 20px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
 }
 
-.alert-button-confirm {
-  background: rgba(255, 255, 255, 0.9) !important;
-  color: #10b981 !important;
-  border-radius: 15px !important;
+/* Botões dos alertas - estilos mais específicos */
+.game-form-alert .alert-button,
+.delete-alert .alert-button {
+  min-height: 40px !important;
+  min-width: 90px !important;
+  font-family: 'Rajdhani', sans-serif !important;
   font-weight: 600 !important;
-  margin: 0 !important;
-  font-family: 'Rajdhani', sans-serif !important;
-  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2) !important;
-  min-width: 100px !important;
+  font-size: 14px !important;
+  border-radius: 12px !important;
+  margin: 0 6px !important;
+  text-align: center !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: none !important;
+  white-space: nowrap !important;
+  padding: 0 12px !important;
 }
 
-.alert-button-cancel {
-  background: transparent !important;
-  color: rgba(255, 255, 255, 0.9) !important;
-  border: 2px solid rgba(255, 255, 255, 0.4) !important;
-  border-radius: 15px !important;
-  margin: 0 !important;
-  font-family: 'Rajdhani', sans-serif !important;
-  min-width: 100px !important;
+.game-form-alert .alert-button.alert-button-confirm,
+.delete-alert .alert-button.alert-button-confirm {
+  background: rgba(255, 255, 255, 0.95) !important;
+  color: #10b981 !important;
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3) !important;
+  border: none !important;
 }
 
-.alert-button-danger {
+.game-form-alert .alert-button.alert-button-cancel,
+.delete-alert .alert-button.alert-button-cancel {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+  border: 2px solid rgba(255, 255, 255, 0.5) !important;
+}
+
+.delete-alert .alert-button.alert-button-confirm {
   background: linear-gradient(45deg, #dc2626, #b91c1c) !important;
   color: white !important;
-  border-radius: 15px !important;
-  font-weight: 600 !important;
-  margin: 0 !important;
-  font-family: 'Rajdhani', sans-serif !important;
   box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4) !important;
-  min-width: 100px !important;
+  border: none !important;
+}
+
+/* Hover effects */
+.game-form-alert .alert-button:hover,
+.delete-alert .alert-button:hover {
+  transform: translateY(-2px) !important;
+  transition: all 0.2s ease !important;
+}
+
+.game-form-alert .alert-button.alert-button-confirm:hover {
+  background: white !important;
+  box-shadow: 0 12px 30px rgba(255, 255, 255, 0.4) !important;
+}
+
+.game-form-alert .alert-button.alert-button-cancel:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+}
+
+.delete-alert .alert-button.alert-button-confirm:hover {
+  background: linear-gradient(45deg, #ef4444, #dc2626) !important;
+  box-shadow: 0 12px 30px rgba(220, 38, 38, 0.6) !important;
 }
 
 /* Tab Bar Styling */
@@ -183,4 +216,91 @@ ion-tab-button.tab-selected {
   display: flex;
   gap: 16px;
   justify-content: center;
+}
+
+/* Centralização geral dos botões */
+.alert-wrapper .alert-button-group {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 15px !important;
+}
+
+.alert-wrapper .alert-button span {
+  width: 100% !important;
+  text-align: center !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100% !important;
+}
+
+.game-form-alert .alert-button span,
+.delete-alert .alert-button span {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  text-align: center !important;
+}
+
+/* Radio buttons nos alertas */
+.game-form-alert .alert-radio-label {
+  color: white !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  font-family: 'Rajdhani', sans-serif !important;
+}
+
+.game-form-alert .alert-radio-group {
+  padding: 15px !important;
+  background: rgba(0, 0, 0, 0.3) !important;
+  border-radius: 10px !important;
+  margin: 10px 0 !important;
+}
+
+/* Estilos para modal personalizado */
+.game-modal {
+  --width: 90%;
+  --max-width: 500px;
+  --height: auto;
+  --max-height: 80%;
+  --border-radius: 20px;
+  --box-shadow: 0 25px 50px rgba(16, 185, 129, 0.4);
+}
+
+.game-modal .modal-wrapper {
+  border-radius: 20px;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+}
+
+/* Estilos para o popover do ion-select */
+ion-popover {
+  --background: linear-gradient(135deg, #10b981 0%, #22c55e 100%);
+  --color: white;
+}
+
+ion-popover ion-content {
+  --background: linear-gradient(135deg, #0f1419 0%, #1a2e1a 100%);
+}
+
+ion-popover ion-item {
+  --background: rgba(255, 255, 255, 0.1);
+  --color: white;
+  border-radius: 8px;
+  margin: 4px;
+}
+
+ion-popover ion-radio {
+  --color: #10b981;
+  --color-checked: #22c55e;
+}
+
+ion-popover ion-label {
+  color: white !important;
+  font-family: 'Rajdhani', sans-serif;
 }

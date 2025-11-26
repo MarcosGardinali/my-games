@@ -10,6 +10,7 @@ export interface Jogo {
   ano: number;
   plataforma: string;
   foto_url?: string | null;
+  status?: 'possuo' | 'desejo';
 }
 
 @Injectable({
@@ -38,5 +39,13 @@ export class JogosService {
 
   deleteJogo(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/jogos/${id}`);
+  }
+
+  marcarComoComprado(id: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/jogos/${id}`, { status: 'possuo' });
+  }
+
+  getJogosPorStatus(status: 'possuo' | 'desejo'): Observable<Jogo[]> {
+    return this.http.get<Jogo[]>(`${this.apiUrl}/jogos?status=${status}`);
   }
 }

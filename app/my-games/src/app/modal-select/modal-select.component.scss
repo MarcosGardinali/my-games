@@ -1,0 +1,67 @@
+ion-header {
+  ion-toolbar {
+    --background: linear-gradient(135deg, #10b981 0%, #22c55e 100%);
+    --color: white;
+  }
+  
+  ion-title {
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  }
+}
+
+ion-content {
+  --background: radial-gradient(ellipse at top, #0f1419 0%, #1a2e1a 50%, #0a0f0a 100%);
+}
+
+ion-item {
+  --background: rgba(255, 255, 255, 0.05);
+  --border-color: rgba(16, 185, 129, 0.3);
+  border-radius: 12px;
+  margin: 8px 0;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+ion-input, ion-textarea {
+  --color: white !important;
+  --placeholder-color: rgba(255, 255, 255, 0.6) !important;
+  font-family: 'Rajdhani', sans-serif;
+}
+
+ion-select {
+  --color: white !important;
+  --placeholder-color: rgba(255, 255, 255, 0.6) !important;
+  font-family: 'Rajdhani', sans-serif;
+  color: white !important;
+}
+
+ion-select::part(text) {
+  color: white !important;
+}
+
+ion-label {
+  --color: white !important;
+  color: white !important;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+}
+
+.sc-ion-label-md-h {
+  color: white !important;
+}
+
+.sc-ion-label-md {
+  color: white !important;
+}
+
+ion-button {
+  --background: linear-gradient(45deg, #10b981, #22c55e);
+  --color: white;
+  --border-radius: 15px;
+  font-weight: 700;
+  font-family: 'Rajdhani', sans-serif;
+  margin-top: 20px;
+  --box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+}

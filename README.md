@@ -65,7 +65,8 @@ CREATE TABLE jogos (
   descricao TEXT,
   ano INT,
   plataforma VARCHAR(50),
-  foto_url VARCHAR(500)
+  foto_url VARCHAR(500),
+  status ENUM('possuo', 'desejo') DEFAULT 'possuo'
 );
 ```
 
@@ -76,9 +77,9 @@ CREATE TABLE jogos (
 - **Volumes:** Persistência de dados
 
 **Serviços:**
-- `db` - MySQL (porta 3306)
-- `api` - Node.js (porta 3000)
-- `app` - Ionic (porta 8100)
+- `db` - MySQL (porta 3308)
+- `api` - Node.js (porta 3002)
+- `app` - Ionic (porta 4200)
 
 ## 🚀 Como Executar o Projeto
 
@@ -101,9 +102,9 @@ docker-compose up --build
 3. **Aguarde a inicialização** (pode levar alguns minutos na primeira vez)
 
 4. **Acesse as aplicações:**
-   - **App:** http://localhost:8100
-   - **API:** http://localhost:3000/jogos
-   - **Banco:** localhost:3306
+   - **App:** http://localhost:4200
+   - **API:** http://localhost:3002/jogos
+   - **Banco:** localhost:3308
 
 ### Comandos Úteis
 
@@ -133,11 +134,14 @@ docker-compose up --build
 - **Validação:** Formulários com validação em tempo real
 
 ### 🎮 Gerenciamento de Jogos
-- **Cadastro:** Nome, descrição, ano, plataforma e foto
-- **Visualização:** Grid de cards com informações
-- **Edição:** Modificar dados existentes
+- **Cadastro:** Nome, descrição, ano, plataforma, foto e status (possuo/desejo)
+- **Visualização:** Grid de cards com informações e indicadores de status
+- **Edição:** Modificar dados existentes incluindo status
 - **Exclusão:** Remover jogos com confirmação
 - **Fotos:** Suporte a URLs de imagens com validação
+- **Status:** Marcar jogos como "Possuo" ou "Lista de Desejos"
+- **Compra:** Marcar jogos da lista de desejos como comprados
+- **Filtros:** Visualizar todos os jogos, apenas os que possuo ou lista de desejos
 
 ### 🔧 Recursos Técnicos
 - **Validação de Imagem:** Verifica URLs antes de salvar

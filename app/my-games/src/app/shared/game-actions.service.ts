@@ -1,59 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { IonicModule, AlertController, ToastController, ModalController } from '@ionic/angular';
+import { Injectable } from '@angular/core';
+import { AlertController, ToastController } from '@ionic/angular';
 import { JogosService, Jogo } from '../services/jogos.service';
-import { ModalSelectComponent } from '../modal-select/modal-select.component';
 
-@Component({
-  selector: 'app-jogos',
-  templateUrl: './jogos.page.html',
-  styleUrls: ['./jogos.page.scss'],
-  standalone: true,
-  imports: [CommonModule, IonicModule]
+@Injectable({
+  providedIn: 'root'
 })
-export class JogosPage implements OnInit {
-  jogos: Jogo[] = [];
+export class GameActionsService {
 
   constructor(
-    private jogosService: JogosService,
     private alertController: AlertController,
     private toastController: ToastController,
-    private modalController: ModalController
+    private jogosService: JogosService
   ) { }
 
-  ngOnInit() {
-    this.loadJogos();
-  }
-
-  ionViewWillEnter() {
-    this.loadJogos();
-  }
-
-  loadJogos() {
-    this.jogosService.getJogos().subscribe({
-      next: (jogos) => this.jogos = jogos,
-      error: (err) => console.error('Erro ao carregar jogos:', err)
-    });
-  }
-
-  async addJogo() {
-    const modal = await this.modalController.create({
-      component: ModalSelectComponent
-    });
-    
-    modal.onDidDismiss().then((result) => {
-      if (result.role === 'confirm' && result.data) {
-        this.jogosService.createJogo(result.data).subscribe({
-          next: () => this.loadJogos(),
-          error: (err) => console.error('Erro ao salvar jogo:', err)
-        });
-      }
-    });
-    
-    await modal.present();
-  }
-
-  async editJogo(jogo: Jogo) {
+  async editJogo(jogo: Jogo, onSuccess: () => void) {
     const alert = await this.alertController.create({
       header: 'Editar Jogo',
       cssClass: 'game-form-alert',
@@ -118,7 +78,7 @@ export class JogosPage implements OnInit {
                   jogoAtualizado.foto_url = isValid ? data.foto_url.trim() : null;
                   this.jogosService.updateJogo(jogo.id!, jogoAtualizado).subscribe({
                     next: () => {
-                      this.loadJogos();
+                      onSuccess();
                       if (!isValid && data.foto_url?.trim()) {
                         this.showToast('URL da imagem inválida, jogo salvo sem foto');
                       }
@@ -128,7 +88,7 @@ export class JogosPage implements OnInit {
                 });
               } else {
                 this.jogosService.updateJogo(jogo.id!, jogoAtualizado).subscribe({
-                  next: () => this.loadJogos(),
+                  next: () => onSuccess(),
                   error: (err) => console.error('Erro ao atualizar jogo:', err)
                 });
               }
@@ -144,7 +104,7 @@ export class JogosPage implements OnInit {
     await alert.present();
   }
 
-  async deleteJogo(jogo: Jogo) {
+  async deleteJogo(jogo: Jogo, onSuccess: () => void) {
     const alert = await this.alertController.create({
       header: 'CONFIRMAR EXCLUSÃO',
       message: `Tem certeza que deseja excluir o jogo "${jogo.nome}"? Esta ação não pode ser desfeita.`,
@@ -157,11 +117,11 @@ export class JogosPage implements OnInit {
         },
         {
           text: 'Excluir',
-          cssClass: 'alert-button-danger',
+          cssClass: 'alert-button-confirm',
           handler: () => {
             this.jogosService.deleteJogo(jogo.id!).subscribe({
               next: () => {
-                this.loadJogos();
+                onSuccess();
                 this.showToast(`Jogo "${jogo.nome}" excluído com sucesso`);
               },
               error: (err) => {
@@ -176,33 +136,7 @@ export class JogosPage implements OnInit {
     await alert.present();
   }
 
-  async showToast(message: string) {
-    const toast = await this.toastController.create({
-      message,
-      duration: 2000,
-      position: 'bottom'
-    });
-    await toast.present();
-  }
-
-  formatDate(dateString: string): string {
-    if (!dateString) return '';
-    const date = new Date(dateString);
-    return date.toLocaleDateString('pt-BR');
-  }
-
-  onImageError(event: any) {
-    const img = event.target;
-    const container = img.parentElement;
-    img.style.display = 'none';
-    
-    const placeholder = document.createElement('div');
-    placeholder.className = 'game-image-placeholder';
-    placeholder.innerHTML = '<ion-icon name="game-controller-outline"></ion-icon>';
-    container.appendChild(placeholder);
-  }
-
-  async marcarComoComprado(jogo: Jogo) {
+  async marcarComoComprado(jogo: Jogo, onSuccess: () => void) {
     const alert = await this.alertController.create({
       header: 'MARCAR COMO COMPRADO',
       message: `Marcar "${jogo.nome}" como comprado? O jogo sairá da lista de desejos.`,
@@ -219,7 +153,7 @@ export class JogosPage implements OnInit {
           handler: () => {
             this.jogosService.marcarComoComprado(jogo.id!).subscribe({
               next: () => {
-                this.loadJogos();
+                onSuccess();
                 this.showToast(`"${jogo.nome}" marcado como comprado!`);
               },
               error: (err) => {
@@ -234,7 +168,16 @@ export class JogosPage implements OnInit {
     await alert.present();
   }
 
-  isValidImageUrl(url: string): Promise<boolean> {
+  private async showToast(message: string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 2000,
+      position: 'bottom'
+    });
+    await toast.present();
+  }
+
+  private isValidImageUrl(url: string): Promise<boolean> {
     return new Promise((resolve) => {
       if (!url || !url.trim()) {
         resolve(false);

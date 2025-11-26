@@ -12,6 +12,14 @@ const routes: Routes = [
         loadChildren: () => import('../jogos/jogos.module').then(m => m.JogosPageModule)
       },
       {
+        path: 'meus-jogos',
+        loadComponent: () => import('../meus-jogos/meus-jogos.page').then(m => m.MeusJogosPage)
+      },
+      {
+        path: 'lista-desejos',
+        loadComponent: () => import('../lista-desejos/lista-desejos.page').then(m => m.ListaDesejosPage)
+      },
+      {
         path: '',
         redirectTo: '/tabs/jogos',
         pathMatch: 'full'

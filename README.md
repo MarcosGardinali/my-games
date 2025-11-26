@@ -96,7 +96,7 @@ cd my-games
 
 2. **Execute o Docker Compose**
 ```bash
-docker-compose up --build
+docker compose up --build
 ```
 
 3. **Aguarde a inicialização** (pode levar alguns minutos na primeira vez)
@@ -110,19 +110,19 @@ docker-compose up --build
 
 **Parar os containers:**
 ```bash
-docker-compose down
+docker compose down
 ```
 
 **Ver logs:**
 ```bash
-docker-compose logs app    # Logs do frontend
-docker-compose logs api    # Logs do backend
-docker-compose logs db     # Logs do banco
+docker compose logs app    # Logs do frontend
+docker compose logs api    # Logs do backend
+docker compose logs db     # Logs do banco
 ```
 
 **Reconstruir containers:**
 ```bash
-docker-compose up --build
+docker compose up --build
 ```
 
 ## 🎯 Funcionalidades
@@ -194,4 +194,4 @@ Projeto desenvolvido como trabalho final da disciplina de **Programação para D
 
 ---
 
-**Desenvolvido com ❤️ para a disciplina de Programação para Dispositivos Móveis**
+**Desenvolvido para a disciplina de Programação para Dispositivos Móveis**
